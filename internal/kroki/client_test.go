@@ -5,7 +5,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/utain/kroki-mcp/internal/model"
+	"github.com/darrengruber/kroki-mcp/internal/model"
 )
 
 func TestRenderDiagram_MockServer(t *testing.T) {

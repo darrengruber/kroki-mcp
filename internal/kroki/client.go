@@ -12,7 +12,7 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/utain/kroki-mcp/internal/model"
+	"github.com/darrengruber/kroki-mcp/internal/model"
 )
 
 type KrokiClient struct {

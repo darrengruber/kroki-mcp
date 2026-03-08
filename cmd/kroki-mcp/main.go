@@ -6,9 +6,9 @@ import (
 
 	"github.com/mark3labs/mcp-go/server"
 	"github.com/spf13/pflag"
-	"github.com/utain/kroki-mcp/internal/config"
-	"github.com/utain/kroki-mcp/internal/kroki"
-	"github.com/utain/kroki-mcp/internal/mcp"
+	"github.com/darrengruber/kroki-mcp/internal/config"
+	"github.com/darrengruber/kroki-mcp/internal/kroki"
+	"github.com/darrengruber/kroki-mcp/internal/mcp"
 )
 
 func main() {
@@ -16,7 +16,7 @@ func main() {
 
 	pflag.StringVarP(&cfg.ServerHost, "host", "h", "localhost", "Server host")
 	pflag.IntVarP(&cfg.ServerPort, "port", "p", 5090, "Server port")
-	pflag.StringVarP(&cfg.ServerMode, "mode", "m", "stdio", "Operation mode: sse or stdio (default)")
+	pflag.StringVarP(&cfg.ServerMode, "mode", "m", "stdio", "Operation mode: http or stdio (default)")
 	pflag.StringVarP(&cfg.OutputFormat, "format", "f", "png", "Output format: png, svg, jpeg, pdf")
 	pflag.StringVar(&cfg.KrokiHost, "kroki-host", "https://kroki.io", "Kroki server host URL")
 	pflag.StringVar(&cfg.LogLevel, "log-level", "info", "Log level: debug, info, warn, error")
@@ -42,11 +42,11 @@ func main() {
 		logger.Info("STDIO mode: reading diagram type and source from stdin")
 		server.ServeStdio(kroki.Handler())
 	default:
-		logger.Info("SSE mode: starting SSE server")
-		sseServer := server.NewSSEServer(kroki.Handler())
-		logger.Info("SSE server started successfully", "host", cfg.ServerHost, "port", cfg.ServerPort)
-		if err := sseServer.Start(fmt.Sprintf("%s:%d", cfg.ServerHost, cfg.ServerPort)); err != nil {
-			logger.Error("Failed to start SSE server", "error", err)
+		logger.Info("HTTP mode: starting Streamable HTTP server")
+		httpServer := server.NewStreamableHTTPServer(kroki.Handler())
+		logger.Info("HTTP server started successfully", "host", cfg.ServerHost, "port", cfg.ServerPort)
+		if err := httpServer.Start(fmt.Sprintf("%s:%d", cfg.ServerHost, cfg.ServerPort)); err != nil {
+			logger.Error("Failed to start HTTP server", "error", err)
 			os.Exit(1)
 		}
 

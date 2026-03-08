@@ -2,8 +2,8 @@ package mcp
 
 import (
 	"github.com/mark3labs/mcp-go/server"
-	"github.com/utain/kroki-mcp/internal/config"
-	"github.com/utain/kroki-mcp/internal/kroki"
+	"github.com/darrengruber/kroki-mcp/internal/config"
+	"github.com/darrengruber/kroki-mcp/internal/kroki"
 )
 
 type DiagramRequest struct {

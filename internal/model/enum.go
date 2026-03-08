@@ -3,17 +3,27 @@ package model
 // Enum types for various diagram formats and output formats
 // and their corresponding MIME types.
 //
-//	Must be one of png, svg
+//	Must be one of png, svg, jpeg, pdf, txt, utxt, base64
 type OutputFormat string
 
 const (
-	PNG OutputFormat = "png"
-	SVG OutputFormat = "svg"
+	PNG    OutputFormat = "png"
+	SVG    OutputFormat = "svg"
+	JPEG   OutputFormat = "jpeg"
+	PDF    OutputFormat = "pdf"
+	TXT    OutputFormat = "txt"
+	UTXT   OutputFormat = "utxt"
+	BASE64 OutputFormat = "base64"
 )
 
 var SupportedOutputFormats = []string{
 	string(PNG),
 	string(SVG),
+	string(JPEG),
+	string(PDF),
+	string(TXT),
+	string(UTXT),
+	string(BASE64),
 }
 
 func (f OutputFormat) MIMEType() string {
@@ -22,6 +32,12 @@ func (f OutputFormat) MIMEType() string {
 		return "image/svg+xml"
 	case PNG:
 		return "image/png"
+	case JPEG:
+		return "image/jpeg"
+	case PDF:
+		return "application/pdf"
+	case TXT, UTXT, BASE64:
+		return "text/plain"
 	default:
 		return "text/plain"
 	}

@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 
 	"github.com/mark3labs/mcp-go/mcp"
-	"github.com/utain/kroki-mcp/internal/model"
+	"github.com/darrengruber/kroki-mcp/internal/model"
 )
 
 func (s *KrokiMCPServer) RegisterDiagramTypesResource() {
